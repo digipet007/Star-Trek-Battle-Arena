@@ -4,42 +4,57 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width = device-width, initial-scale = 1">
         <title>Star Trek Game</title>
-        <!--Bootstrap CDN-->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Star Trek RPG</h1>
-        <div id="character-pictures">
-            <div class="character">
-                <h3>Worf</h3>
-                <img class="pic" id="worf" src="assets/images/worf.jpg">
+
+        <img id="icon" src="assets/images/icon.png">
+        <h1 class="title">Star Trek RPG</h1>
+
+        <div class="container">
+
+            <div id="character-pictures">
+                <div class="character" id="worf">
+                    <p class="characterTitle">Worf</p>
+                    <img class="pic" src="assets/images/worf.jpg">
+                    <div id="worfHealth" class="characterTitle">#</div>
+                </div>
+
+                <div class="character" id="picard">
+                    <p class="characterTitle">Captain Picard</p>
+                    <img class="pic" src="assets/images/picard-1200x680.jpg">
+                    <div class="characterTitle" id="picardHealth">#</div>
+                </div>
+
+                <div class="character" id="spock">
+                    <p class="characterTitle">Spock</p>
+                    <img class="pic" src="assets/images/spock-1024x536.jpg">
+                    <div class="characterTitle" id="spockHealth">#</div>
+                </div>
+
+                <div class="character" id="gorn">
+                    <p class="characterTitle">Gorn</p>
+                    <img class="pic" src="assets/images/gorn.jpg">
+                    <div class="characterTitle" id="gornHealth">#</div>
+                </div>
             </div>
 
-            <div class="character">
-                <img class="pic" id="picard" src="assets/images/picard-1200x680.jpg">
+            <div id="main-section">
+                <p id="yourCharacter">Your Character:</p>
 
+                <p id="chooseEnemy">Enemies Available to Attack:</p>
+
+            <div>
+                <p id="fightSection">Fight Section</p>
+                <button type="button">Attack</button>
             </div>
 
-            <div class="character">
-                <img class="pic" id="spock" src="assets/images/spock-1024x536.jpg">
-            </div>
-
-            <div class="character">
-                <img class="pic" id="lizardMan" src="assets/images/lizard-man638x425.jpg">
+                <p id="defender">Defender</p>
             </div>
         </div>
-
-        <p id="yourCharacter">Your Character:</p>
-
-        <p id="chooseEnemy">Enemies Available to Attack:</p>
-
-        <div>
-            <p id="fightSection">Fight Section</p>
-            <button type="button">Attack</button>
-        </div>
-
-        <p id="defender">Defender</p>
-
-
     </body>
 </html>
