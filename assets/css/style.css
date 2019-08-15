@@ -25,21 +25,25 @@ div.container {
     float: left;
     background-color: wheat;
     padding: 0px 15px 0px 15px;
-    margin: 0px;
+    margin: 0px 0px 0px 0px;
     border: 2px solid black;
+    text-align: center;
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .pic {
-    height: 100px;
-    width: 135px;
+    height: 85px;
+    width: 130px;
     object-fit: cover;
-    border: 1px solid grey;
 }
 
 #main-section {
     clear: both;
     margin: 10px 0px 0px 0px;
-    padding: 15px;
+    padding: 0px 15px;
     font-family: 'Alegreya Sans SC', sans-serif;
     font-size: 20px;
     font-weight: 600;
@@ -48,26 +52,46 @@ div.container {
 
 h1.title {
     text-align: right;
-    margin: 0px 300px 3px 0px;
+    margin: 0px 90px 3px 0px;
     padding: 10px; 
     font-weight: 800;
     font-size: 35px;
     font-family: 'Orbitron', sans-serif;
+    color: rgb(56, 1, 1);
+    position: static;
 }
 
 #icon{
     top: 3px;
-    right: 600px;
+    right: 550px;
     height: 50px;
     position: fixed;
 }
 
-p.characterTitle{
-    margin: 2px;
+.characterTitle{
+    margin: 0px 0px 0px 0px;
     font-weight: bold;
 }
 
-#chooseEnemy{
+.characterHealth{
+    margin: 0px 0px 0px 0px;
+    font-weight: bold;
+}
+
+/* #enemiesAvailableToAttack{
     position: fixed;
     top: 455px;
+} */
+
+#yourCharacter, #enemiesAvailableToAttack, #fightSection, #defender{
+    clear: both;
+}
+
+#directions{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-weight: 600;
+    font-size: 30px;
+    font-family: 'Alegreya Sans SC', sans-serif;
 }
