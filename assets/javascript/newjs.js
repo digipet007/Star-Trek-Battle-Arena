@@ -69,6 +69,7 @@ $(document).ready(function() {
             $(charDiv).addClass("enemy");
         }
         else if (charStatus === "defender"){
+            console.log("charStatus is defender");  //this if statement is not being triggered by line 123
             //empty variable, currDefender is assigned the current defender's info
             currDefender = character;
             $(charDiv).addClass("target-enemy");
@@ -107,13 +108,15 @@ $(document).ready(function() {
                 var name = ($(this).attr("data-name"));
                 //check to make sure there are not yet defenders
                 if ($("#defender").children().length <=1) {
+                    console.log("#defender characters are less than 1");
                     renderCharacters(name, "#defender");
-                    $(this).hide();
+                    // $("#enemiesAvailableToAttack").hide(); //used to be $("this").hide();
                 }
             })
         }
         //make sure the selected enemy needs to be rendered to the #defender div. If so, render
         if (areaRender === "#defender") {
+            console.log("#defender is areaRender");
             $(areaRender).empty();
             for (var i = 0; i < combatants.length; i++){
                 if(combatants[i] === charobj){
