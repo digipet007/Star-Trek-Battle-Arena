@@ -69,7 +69,7 @@ $(document).ready(function() {
             $(charDiv).addClass("enemy");
         }
         else if (charStatus === "defender"){
-            console.log("charStatus is defender");  //this if statement is not being triggered by line 123
+            // console.log("charStatus is defender");  //problem: this if statement is not being triggered by line 123
             //empty variable, currDefender is assigned the current defender's info
             currDefender = character;
             $(charDiv).addClass("target-enemy");
@@ -101,25 +101,30 @@ $(document).ready(function() {
             
             //Loop through combatants array
             for(var i = 0; i < charobj.length; i++){
-                renderEm(charobj[i], areaRender, "enemy"); //just added enemy status. loop in beginning of code then adds enemy class.
+                renderEm(charobj[i], areaRender, "enemy"); //added enemy status loop in beginning of code then adds enemy class.
             }
             //on click event for each enemy
             $(document).on("click", ".enemy", function(){
                 var name = ($(this).attr("data-name"));
                 //check to make sure there are not yet defenders
                 if ($("#defender").children().length <=1) {
-                    console.log("#defender characters are less than 1");
-                    renderCharacters(name, "#defender");
-                    // $("#enemiesAvailableToAttack").hide(); //used to be $("this").hide();
+                    // console.log("#defender characters are less than 1"); //checks out
+                    renderCharacters(name, "#defender"); //potential problem?
+                    $("#enemiesAvailableToAttack").hide(); //works! note: used to be $("this").hide();
                 }
             })
         }
         //make sure the selected enemy needs to be rendered to the #defender div. If so, render
         if (areaRender === "#defender") {
-            console.log("#defender is areaRender");
-            $(areaRender).empty();
+            // console.log("#defender is areaRender"); //checks out
+            $(areaRender).empty(); //feedback from console thumbs up
+            console.log(charobj);
+            
             for (var i = 0; i < combatants.length; i++){
-                if(combatants[i] === charobj){
+                //console.log(combatants[i].name);
+                // console.log("for loop in line 122 working"); //checks out
+                if(combatants[i].name === charobj){  //potential problem: charobj is not part of the RenderEm function!
+                    console.log(combatants[i].name); // problem: no feedback from console
                     renderEm(combatants, areaRender, "defender");
                 }
             }
@@ -155,8 +160,8 @@ $(document).ready(function() {
                     combatants.push(characters[key]);
                 }
             }
-            console.log(combatants);
-
+            // console.log(combatants);
+            
             $("#character-pictures").hide();
 
             renderCharacters(currentlySelectedCharacter, "#yourCharacter");
