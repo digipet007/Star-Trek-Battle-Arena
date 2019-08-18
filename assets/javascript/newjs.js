@@ -52,6 +52,10 @@ $(document).ready(function() {
     var combatants = [];
     //populated once player selects an enemy
     var currDefender;
+    //counter variable to keep track of turns and serve as damage multiplier for character turns
+    var turnCounter = 1;
+    //stores number of defeated opponents
+    var deaths = 0;
 
     //FUNCTIONS -------------------------------------------------------------------------
     //This function will render a character card to the page when called
@@ -72,9 +76,21 @@ $(document).ready(function() {
             // console.log("charStatus is defender");  //problem: this if statement is not being triggered by line 123
             //empty variable, currDefender is assigned the current defender's info
             currDefender = character;
+            // console.log(currDefender); checks out
             $(charDiv).addClass("target-enemy");
         }
     }
+    //function for messages
+    var renderMessage = function(message) {
+        var gameMessage = $("#directions");
+        var newMessage = $("<div>").text(message);
+        gameMessage.append(newMessage);
+        //clear message
+        if (message === "clearMessage"){
+            gameMessage.text("");
+        }
+    }
+
     //renderCharacter function renders the characters as a string.
     //parameters: 1) the character to be rendered 2) in which ID they will be rendered   
     var renderCharacters = function(charobj, areaRender) {
@@ -111,6 +127,8 @@ $(document).ready(function() {
                     // console.log("#defender characters are less than 1"); //checks out
                     renderCharacters(name, "#defender"); //potential problem?
                     $("#enemiesAvailableToAttack").hide(); //works! note: used to be $("this").hide();
+                    renderMessage("clearMessage");
+                    choosingEnemy = false;
                 }
             })
         }
@@ -129,7 +147,40 @@ $(document).ready(function() {
                 }
             }
         }
+        // render defender health stats over again
+        if (areaRender === "playerDamage") {
+            $("#defender").empty();
+            renderEm(charobj, "#defender", "defender");
+        }
+        //render your character's health stats all over again
+        if (areaRender === "enemyDamage") {
+            $("#yourCharacter").empty();
+            renderEm(charobj, "#yourCharacter", "");
+        }
+        //defeated enemy is removed
+        if (areaRender === "enemyDefeated"){
+            $("#defender").empty();
+            var gameStateMessage = "You have defeated " + charobj.name + "! Choose another opponent";
+            renderMessage(gameStateMessage);
+        }
     }
+
+    //Game restart function
+    var restartGame = function(inputEndGame) {
+
+        //restart button reloads the page
+        var restart = $("<button>Restart</button>").click(function(){
+            location.reload();
+        })
+        //create div to hold end of game message
+        var gameState = $("<div>").text(inputEndGame);
+
+        //render restart button and message
+        $("body").append(gameState);
+        $("body").append(restart);
+    }
+
+    //--------------------------------------------------------------------------
     //note to self: function expressions (not declarations) must be called after the expression (acting as a variable)
     //function call to render all characters to the starting area to begin the game
     renderCharacters(characters, "#character-pictures");
@@ -167,5 +218,54 @@ $(document).ready(function() {
             renderCharacters(currentlySelectedCharacter, "#yourCharacter");
             renderCharacters(combatants, "#enemiesAvailableToAttack");
         }
+    })
+    //attack button on click function (kept as a separate function)
+    $("#attackButton").on("click", function(){
+        if ($("#defender").children().length !== 0){
+            //game directions/updates
+            var attackMessage = "You attacked " + currDefender.name + "for " + (currentlySelectedCharacter.attackPower * turnCounter) + " points.";
+            var counterAttackMessage = currDefender.name + " attacked you back for " + currDefender.counterAttackPower + " damage.";
+            renderMessage("clearMessage");
+            //reduce defender's health
+            currDefender.health -= (currentlySelectedCharacter.attack * turnCounter);
+            if (currDefender.health > 0) {
+                //update defender's/enemy's health on their display- completed in if statement in line 136
+                renderCharacters(currDefender, "playerDamage");
+                //render messages
+                renderMessage(attackMessage);
+                //reduce your health by defender's attack
+                currentlySelectedCharacter.health -= currDefender.counterAttackPower;
+                renderMessage(counterAttackMessage);
+                //update your character's health on their display (if statement around line 140)
+                renderCharacters(currentlySelectedCharacter, "enemyDamage");
+                //if you have less than zero health, call restart game function
+                if (currentlySelectedCharacter.health <= 0){
+                    renderMessage("clearMessage");
+                    restartGame("You have been defeated.  Game over");
+                    $("#attackButton").unbind("click");
+                }
+            }
+            //if the enemy's HP drops to 0, they are defeated!
+            else {
+                //enemy dies and disappears from the playing board
+                renderCharacters(currDefender, "enemyDefeated");
+                deaths++;
+                if (deaths >= 3) {
+                    renderMessage("clearMessage");
+                    restartGame("You win!!");
+                }
+            }
+        }
+        // //if the enemy's HP drops to 0, they are defeated!
+        // else {
+        //     //enemy dies and disappears from the playing board
+        //     renderCharacters(currDefender, "enemyDefeated");
+        //     deaths++;
+        //     if (deaths >= 3) {
+        //         renderMessage("clearMessage");
+        //         restartGame("You win!!");
+        //     }
+        // }
+        turnCounter++;
     })
 });
