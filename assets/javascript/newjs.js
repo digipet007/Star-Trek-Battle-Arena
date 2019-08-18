@@ -123,9 +123,9 @@ $(document).ready(function() {
             for (var i = 0; i < combatants.length; i++){
                 //console.log(combatants[i].name);
                 // console.log("for loop in line 122 working"); //checks out
-                if(combatants[i].name === charobj){  //potential problem: charobj is not part of the RenderEm function!
-                    console.log(combatants[i].name); // problem: no feedback from console
-                    renderEm(combatants, areaRender, "defender");
+                if(combatants[i].name === charobj){  //fixed problem of not specifying index or the array of objects (aka combatants)
+                    console.log(combatants[i].name); // problem: no feedback from console- fixed!!
+                    renderEm(combatants[i], areaRender, "defender");
                 }
             }
         }
