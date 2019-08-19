@@ -4,44 +4,34 @@ $(document).ready(function() {
         "worf" : {
             "name" : "Worf",
             "imageURL" : "assets/images/worf.jpg",
-            "health" : 70,
-            "attackPower" : 20,
+            "health" : 100,
+            "attackPower" : 18,
             "counterAttackPower" : 10,
-            "willFight" : false,
-            "potentialEnemy" : false,
-            // "currentlySelectedCharacter": false
         },
         "picard": {
             "name" : "Picard",
             "imageURL" : "assets/images/picard-1200x680.jpg",
-            "health" : 50,
-            "attackPower" : 10,
-            "counterAttackPower" : 40,
-            "willFight" : false,
-            "potentialEnemy" : false,
-            // "currentlySelectedCharacter": false
+            "health" : 110,
+            "attackPower" : 8,
+            "counterAttackPower" : 9,
         },
         "spock": {
             "name" : "Spock",
             "imageURL" : "assets/images/spock-1024x536.jpg",
-            "health" : 33,
-            "attackPower" : 33,
-            "counterAttackPower" : 34,
-            "willFight" : false,
-            "potentialEnemy" : false,
-            // "currentlySelectedCharacter": false
+            "health" : 123,
+            "attackPower" : 14,
+            "counterAttackPower" : 11,
         },
         "gorn": {
             "name" : "Gorn",
             "imageURL" : "assets/images/gorn.jpg",
-            "health" : 60,
-            "attackPower" : 20,
-            "counterAttackPower" : 20,
-            "willFight" : false,
-            "potentialEnemy" : false,
-            // "currentlySelectedCharacter": false
+            "health" : 100,
+            "attackPower" : 8,
+            "counterAttackPower" : 7,
         }
     };
+
+    console.log(characters);
 
     //booleans to control game flow and switch if statements on and off
     var hasSelectedCharacter = false;
@@ -73,11 +63,11 @@ $(document).ready(function() {
             $(charDiv).addClass("enemy");
         }
         else if (charStatus === "defender"){
-            // console.log("charStatus is defender");  //problem: this if statement is not being triggered by line 123
+            // console.log("charStatus is defender");  
             //empty variable, currDefender is assigned the current defender's info
             currDefender = character;
             // console.log(currDefender); checks out
-            $(charDiv).addClass("target-enemy");
+            $(charDiv).addClass("target-enemy"); //problem: does not assign class
         }
     }
     //function for messages
@@ -125,7 +115,7 @@ $(document).ready(function() {
                 //check to make sure there are not yet defenders
                 if ($("#defender").children().length <=1) {
                     // console.log("#defender characters are less than 1"); //checks out
-                    renderCharacters(name, "#defender"); //potential problem?
+                    renderCharacters(name, "#defender"); 
                     $("#enemiesAvailableToAttack").hide(); //works! note: used to be $("this").hide();
                     renderMessage("clearMessage");
                     choosingEnemy = false;
@@ -136,13 +126,13 @@ $(document).ready(function() {
         if (areaRender === "#defender") {
             // console.log("#defender is areaRender"); //checks out
             $(areaRender).empty(); //feedback from console thumbs up
-            console.log(charobj);
+            // console.log(charobj);
             
             for (var i = 0; i < combatants.length; i++){
                 //console.log(combatants[i].name);
                 // console.log("for loop in line 122 working"); //checks out
                 if(combatants[i].name === charobj){  //fixed problem of not specifying index or the array of objects (aka combatants)
-                    console.log(combatants[i].name); // problem: no feedback from console- fixed!!
+                    // console.log(combatants[i].name); // fixed!!
                     renderEm(combatants[i], areaRender, "defender");
                 }
             }
@@ -151,11 +141,13 @@ $(document).ready(function() {
         if (areaRender === "playerDamage") {
             $("#defender").empty();
             renderEm(charobj, "#defender", "defender");
+            // console.log(charobj);
         }
         //render your character's health stats all over again
         if (areaRender === "enemyDamage") {
             $("#yourCharacter").empty();
-            renderEm(charobj, "#yourCharacter", "");
+            // console.log(currentlySelectedCharacter);
+            renderEm(currentlySelectedCharacter, "#yourCharacter", ""); //fixed problem: thought defender was charobj AND currentlySelectedCharacter
         }
         //defeated enemy is removed
         if (areaRender === "enemyDefeated"){
@@ -185,87 +177,97 @@ $(document).ready(function() {
     //function call to render all characters to the starting area to begin the game
     renderCharacters(characters, "#character-pictures");
 
-    //on click event for selecting main character
+    //on click event for selecting main character. Only happens once in the game
     $(document).on("click", ".character", function() {
-        //"name" is given the value of the attribute data name of the selected DOM element/ div (aka: "this"). The variable stores the data-name of WHATEVER character is clicked on.
-        var selectedName = $(this).attr("data-name");
-        hasSelectedCharacter = true;
-        if (selectedName === "Worf") {
-            currentlySelectedCharacter = characters.worf;
-        } 
-        else if (selectedName === "Picard") {
-            currentlySelectedCharacter = characters.picard;
-        }
-        else if (selectedName === "Spock") {
-            currentlySelectedCharacter = characters.spock;
-        }
-        else {
-            currentlySelectedCharacter = characters.gorn;
-        }
-        //make sure there is no currently-selected character
-        if (hasSelectedCharacter & !choosingEnemy) {
-            //loop through remaining characters and push them to the enemies array using for variable in object loop (used above as well) **Had to include characters[key] in if statement to facilitate mutual exclusivity of combatants
-            for (var key in characters) {
-                if (characters[key] !== currentlySelectedCharacter) {
-                    // console.log(characters[key]);
-                    combatants.push(characters[key]);
-                }
+        if (choosingEnemy === false && hasSelectedCharacter === false){
+            //"name" is given the value of the attribute data name of the selected DOM element/ div (aka: "this"). The variable stores the data-name of WHATEVER character is clicked on.
+            var selectedName = $(this).attr("data-name");
+            hasSelectedCharacter = true;
+            if (selectedName === "Worf") {
+                currentlySelectedCharacter = characters.worf;
+            } 
+            else if (selectedName === "Picard") {
+                currentlySelectedCharacter = characters.picard;
             }
-            // console.log(combatants);
-            
-            $("#character-pictures").hide();
+            else if (selectedName === "Spock") {
+                currentlySelectedCharacter = characters.spock;
+            }
+            else {
+                currentlySelectedCharacter = characters.gorn;
+            }
+            //make sure there is no currently-selected character
+            if (hasSelectedCharacter & !choosingEnemy) {
+                //loop through remaining characters and push them to the enemies array using for variable in object loop (used above as well) **Had to include characters[key] in if statement to facilitate mutual exclusivity of combatants
+                for (var key in characters) {
+                    if (characters[key] !== currentlySelectedCharacter) {
+                        // console.log(characters[key]);
+                        combatants.push(characters[key]);
+                    }
+                }
+                // console.log(combatants);
+                
+                $("#character-pictures").hide();
 
-            renderCharacters(currentlySelectedCharacter, "#yourCharacter");
-            renderCharacters(combatants, "#enemiesAvailableToAttack");
+                renderCharacters(currentlySelectedCharacter, "#yourCharacter");
+                choosingEnemy = true; //not sure if this should be here...
+                renderCharacters(combatants, "#enemiesAvailableToAttack");
+            }
         }
     })
     //attack button on click function (kept as a separate function)
     $("#attackButton").on("click", function(){
         if ($("#defender").children().length !== 0){
             //game directions/updates
-            var attackMessage = "You attacked " + currDefender.name + "for " + (currentlySelectedCharacter.attackPower * turnCounter) + " points.";
+            var attackMessage = "You attacked " + currDefender.name + " for " + (currentlySelectedCharacter.attackPower * turnCounter) + " points.";
             var counterAttackMessage = currDefender.name + " attacked you back for " + currDefender.counterAttackPower + " damage.";
             renderMessage("clearMessage");
             //reduce defender's health
-            currDefender.health -= (currentlySelectedCharacter.attack * turnCounter);
+            // console.log(currDefender); checks out now
+            currDefender.health -= currentlySelectedCharacter.attackPower;
+            // console.log(currDefender); checks out now
             if (currDefender.health > 0) {
+                // console.log("currDefender's health > 0"); //fixed problem: wasn't firing
                 //update defender's/enemy's health on their display- completed in if statement in line 136
-                renderCharacters(currDefender, "playerDamage");
+                renderCharacters(currDefender, "playerDamage"); 
                 //render messages
                 renderMessage(attackMessage);
                 //reduce your health by defender's attack
                 currentlySelectedCharacter.health -= currDefender.counterAttackPower;
                 renderMessage(counterAttackMessage);
                 //update your character's health on their display (if statement around line 140)
-                renderCharacters(currentlySelectedCharacter, "enemyDamage");
-                //if you have less than zero health, call restart game function
-                if (currentlySelectedCharacter.health <= 0){
-                    renderMessage("clearMessage");
-                    restartGame("You have been defeated.  Game over");
-                    $("#attackButton").unbind("click");
-                }
+                renderCharacters(currentlySelectedCharacter, "enemyDamage"); 
+            }
+            //if you have less than zero health, call restart game function
+            if (currentlySelectedCharacter.health <= 0){
+                renderMessage("clearMessage");
+                restartGame("You have been defeated.  Game over");
+                $("#attackButton").unbind("click");
+                choosingEnemy = true;
             }
             //if the enemy's HP drops to 0, they are defeated!
-            else {
+            else if (currDefender.health <=0){
                 //enemy dies and disappears from the playing board
                 renderCharacters(currDefender, "enemyDefeated");
                 deaths++;
+                choosingEnemy = true;
+                // combatants.remove(currDefender)
+                $("#enemiesAvailableToAttack").empty();
+                $("#enemiesAvailableToAttack").show();
+                //gets the index of the defeated opponent
+                var index = combatants.indexOf(currDefender);
+                console.log(combatants[index]); //checks out
+                // delete combatants[index];
+                renderCharacters(combatants, "#enemiesAvailableToAttack"); 
+
+                // will need remove currDefender from combatants- remove div with class "target-enemy", added on line 70- not correctly added...
+                $( "div" ).remove( ".target-enemy" );
+
                 if (deaths >= 3) {
                     renderMessage("clearMessage");
                     restartGame("You win!!");
                 }
             }
         }
-        // //if the enemy's HP drops to 0, they are defeated!
-        // else {
-        //     //enemy dies and disappears from the playing board
-        //     renderCharacters(currDefender, "enemyDefeated");
-        //     deaths++;
-        //     if (deaths >= 3) {
-        //         renderMessage("clearMessage");
-        //         restartGame("You win!!");
-        //     }
-        // }
         turnCounter++;
     })
 });
