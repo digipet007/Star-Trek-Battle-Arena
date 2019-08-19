@@ -6,7 +6,7 @@ $(document).ready(function() {
             "imageURL" : "assets/images/worf.jpg",
             "health" : 100,
             "attackPower" : 18,
-            "counterAttackPower" : 20,
+            "counterAttackPower" : 30,
         },
         "picard": {
             "name" : "Picard",
@@ -20,7 +20,7 @@ $(document).ready(function() {
             "imageURL" : "assets/images/spock-1024x536.jpg",
             "health" : 123,
             "attackPower" : 10,
-            "counterAttackPower" : 11,
+            "counterAttackPower" : 15,
         },
         "gorn": {
             "name" : "Gorn",
