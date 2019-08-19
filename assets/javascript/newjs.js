@@ -218,11 +218,11 @@ $(document).ready(function() {
             renderMessage("clearMessage");
             //reduce defender's health
             // console.log(currDefender); checks out now
-            console.log(currentlySelectedCharacter.attackPower);
+            // console.log(currentlySelectedCharacter.attackPower);
             currDefender.health -= currentlySelectedCharacter.attackPower;
             //attack power increases by 6 each time your caracter attacks
             currentlySelectedCharacter.attackPower += 6;
-            console.log(currentlySelectedCharacter.attackPower);
+            // console.log(currentlySelectedCharacter.attackPower);
             // console.log(currDefender); checks out now
             if (currDefender.health > 0) {
                 // console.log("currDefender's health > 0"); //fixed problem: wasn't firing
@@ -253,7 +253,7 @@ $(document).ready(function() {
                 $("#enemiesAvailableToAttack").show();
                 //gets the index of the defeated opponent
                 if (deaths === 1){
-                    console.log(deaths);
+                    // console.log(deaths);
                     // console.log(combatants[index]); //checks out
                     //causes name in rendering functions to become undefined (maybe line 114):
                     // delete combatants[index];
