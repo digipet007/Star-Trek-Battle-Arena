@@ -6,8 +6,9 @@
 body {
     background-image: url("../images/background.jpg");
     background-color: #886565;
-    background-position-y: 58px;
+    /* background-position-y: 58px; */
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
 }
 
@@ -19,13 +20,14 @@ div.container {
     text-align: center;
     position: relative;
     float: left;
+    margin: 0px 0px 0px 20px;
 }
 
 .character {
     float: left;
     background-color: wheat;
     padding: 0px 15px 0px 15px;
-    margin: 50px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
     border: 2px solid black;
     text-align: center;
     position: relative;
@@ -42,7 +44,7 @@ div.container {
 
 #main-section {
     clear: both;
-    margin: 10px 0px 0px 0px;
+    margin: 0px 0px 0px 20px;
     padding: 0px 15px;
     font-family: 'Alegreya Sans SC', sans-serif;
     font-size: 20px;
@@ -52,9 +54,9 @@ div.container {
 
 h1.title {
     text-align: right;
-    margin: 0px 90px 3px 0px;
+    margin: 0px 60px 3px 0px;
     padding: 10px; 
-    font-weight: 800;
+    font-weight: 900;
     font-size: 35px;
     font-family: 'Orbitron', sans-serif;
     color: rgb(56, 1, 1);
@@ -63,7 +65,7 @@ h1.title {
 
 #icon{
     top: 3px;
-    right: 550px;
+    right: 520px;
     height: 50px;
     position: fixed;
 }
@@ -89,9 +91,18 @@ h1.title {
 
 #directions{
     position: fixed;
-    top: 10px;
-    left: 10px;
-    font-weight: 600;
-    font-size: 30px;
-    font-family: 'Alegreya Sans SC', sans-serif;
+    top: 70%;
+    left: 55%;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.enemy {
+    background-color: rgb(200, 0, 0);
+}
+
+.target-enemy {
+    background-color: rgb(110, 0, 0);
+    color: white;
 }

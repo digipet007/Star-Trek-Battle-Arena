@@ -19,7 +19,7 @@ $(document).ready(function() {
             "name" : "Spock",
             "imageURL" : "assets/images/spock-1024x536.jpg",
             "health" : 123,
-            "attackPower" : 14,
+            "attackPower" : 10,
             "counterAttackPower" : 11,
         },
         "gorn": {
@@ -67,7 +67,7 @@ $(document).ready(function() {
             //empty variable, currDefender is assigned the current defender's info
             currDefender = character;
             // console.log(currDefender); checks out
-            $(charDiv).addClass("target-enemy"); //problem: does not assign class
+            $(charDiv).addClass("target-enemy"); //problem: does not assign class- fixed!!
         }
     }
     //function for messages
@@ -224,6 +224,8 @@ $(document).ready(function() {
             //reduce defender's health
             // console.log(currDefender); checks out now
             currDefender.health -= currentlySelectedCharacter.attackPower;
+            //attack power increases by 6 each time your caracter attacks
+            currentlySelectedCharacter.attackPower += 6;
             // console.log(currDefender); checks out now
             if (currDefender.health > 0) {
                 // console.log("currDefender's health > 0"); //fixed problem: wasn't firing
@@ -250,17 +252,46 @@ $(document).ready(function() {
                 renderCharacters(currDefender, "enemyDefeated");
                 deaths++;
                 choosingEnemy = true;
-                // combatants.remove(currDefender)
                 $("#enemiesAvailableToAttack").empty();
                 $("#enemiesAvailableToAttack").show();
                 //gets the index of the defeated opponent
-                var index = combatants.indexOf(currDefender);
-                console.log(combatants[index]); //checks out
-                // delete combatants[index];
-                renderCharacters(combatants, "#enemiesAvailableToAttack"); 
+                if (deaths === 1){
+                    console.log(deaths);
+                    // console.log(combatants[index]); //checks out
+                    //causes name in rendering functions to become undefined (maybe line 114):
+                    // delete combatants[index];
+                    var index = combatants.indexOf(currDefender);
+                    for (var key in combatants) {
+                        // console.log(combatants); checks out
+                        //broke entire code. Game starts unrendered:
+                        // if (characters[key] !== currentlySelectedCharacter && characters[key] !== combatants[index]) {
+                        if (combatants[key] !== combatants[index]) {
+                        // console.log(combatants[key]); //checks out!
+                        // console.log(charobj); charobj is undefined
+                        // $(combatants).empty();
+                        // // console.log(characters[key]);
+                        // combatants.push(characters[key]);
+                        renderEm(combatants[key], "#enemiesAvailableToAttack", "enemy"); 
+                        choosingEnemy = true;
+                        }
+                    }
+                }
+                if (deaths === 2){
+                    console.log(deaths);
+                    for (var key in combatants){
+                    if (combatants[key].health > 0)
+                    renderEm(combatants[key], "#enemiesAvailableToAttack", "enemy"); 
+                    choosingEnemy = true;
+                    }
+                }
+                // if (combatants[index].health <= 0) {
+                //     (combatants[index]).detatch();
+                // } 
 
-                // will need remove currDefender from combatants- remove div with class "target-enemy", added on line 70- not correctly added...
-                $( "div" ).remove( ".target-enemy" );
+
+                //also need to consolelog damage
+                // $("div").remove(".target-enemy"); this class is removed after defeat
+                // $(".target-enemy").hide();
 
                 if (deaths >= 3) {
                     renderMessage("clearMessage");
