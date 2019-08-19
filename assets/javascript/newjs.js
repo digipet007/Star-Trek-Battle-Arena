@@ -161,7 +161,6 @@ $(document).ready(function() {
     var restartGame = function(inputEndGame) {
         //restart button reloads the page
         var restart = $("<button>Restart</button>").click(function(){
-            // $(this).addClass("restart-button");
             location.reload();
         })
         //create div to hold end of game message
@@ -291,6 +290,8 @@ $(document).ready(function() {
                 if (deaths >= 3) {
                     renderMessage("clearMessage");
                     restartGame("You are the undefeated champion!!");
+                    $("#fightSection").hide();
+                    $("#attackButton").hide();
                 }
             }
         }
