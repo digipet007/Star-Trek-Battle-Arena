@@ -6,7 +6,7 @@ $(document).ready(function() {
             "imageURL" : "assets/images/worf.jpg",
             "health" : 100,
             "attackPower" : 18,
-            "counterAttackPower" : 10,
+            "counterAttackPower" : 20,
         },
         "picard": {
             "name" : "Picard",
@@ -159,19 +159,17 @@ $(document).ready(function() {
 
     //Game restart function
     var restartGame = function(inputEndGame) {
-
         //restart button reloads the page
         var restart = $("<button>Restart</button>").click(function(){
+            // $(this).addClass("restart-button");
             location.reload();
         })
         //create div to hold end of game message
         var gameState = $("<div>").text(inputEndGame);
-
         //render restart button and message
         $("body").append(gameState);
         $("body").append(restart);
     }
-
     //--------------------------------------------------------------------------
     //note to self: function expressions (not declarations) must be called after the expression (acting as a variable)
     //function call to render all characters to the starting area to begin the game
@@ -205,9 +203,7 @@ $(document).ready(function() {
                     }
                 }
                 // console.log(combatants);
-                
                 $("#character-pictures").hide();
-
                 renderCharacters(currentlySelectedCharacter, "#yourCharacter");
                 choosingEnemy = true; //not sure if this should be here...
                 renderCharacters(combatants, "#enemiesAvailableToAttack");
@@ -218,14 +214,16 @@ $(document).ready(function() {
     $("#attackButton").on("click", function(){
         if ($("#defender").children().length !== 0){
             //game directions/updates
-            var attackMessage = "You attacked " + currDefender.name + " for " + (currentlySelectedCharacter.attackPower * turnCounter) + " points.";
+            var attackMessage = "You attacked " + currDefender.name + " for " + (currentlySelectedCharacter.attackPower) + " damage.";
             var counterAttackMessage = currDefender.name + " attacked you back for " + currDefender.counterAttackPower + " damage.";
             renderMessage("clearMessage");
             //reduce defender's health
             // console.log(currDefender); checks out now
+            console.log(currentlySelectedCharacter.attackPower);
             currDefender.health -= currentlySelectedCharacter.attackPower;
             //attack power increases by 6 each time your caracter attacks
             currentlySelectedCharacter.attackPower += 6;
+            console.log(currentlySelectedCharacter.attackPower);
             // console.log(currDefender); checks out now
             if (currDefender.health > 0) {
                 // console.log("currDefender's health > 0"); //fixed problem: wasn't firing
@@ -287,12 +285,9 @@ $(document).ready(function() {
                 // if (combatants[index].health <= 0) {
                 //     (combatants[index]).detatch();
                 // } 
-
-
                 //also need to consolelog damage
                 // $("div").remove(".target-enemy"); this class is removed after defeat
                 // $(".target-enemy").hide();
-
                 if (deaths >= 3) {
                     renderMessage("clearMessage");
                     restartGame("You are the undefeated champion!!");

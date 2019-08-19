@@ -5,7 +5,7 @@
 /* add a background */
 body {
     background-image: url("../images/background.jpg");
-    background-color: #ff7957;
+    background-color: #f6879f;
     background-position-y: 58px;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -54,19 +54,19 @@ div.container {
 
 h1.title {
     text-align: right;
-    margin: 0px 60px 3px 0px;
+    margin: 0px 70px 3px 0px;
     padding: 10px; 
-    font-weight: 900;
-    font-size: 35px;
+    font-weight: 950;
+    font-size: 40px;
     font-family: 'Orbitron', sans-serif;
     color: rgb(56, 1, 1);
     position: static;
 }
 
 #icon{
-    top: 3px;
-    right: 520px;
-    height: 50px;
+    top: 5px;
+    right: 600px;
+    height: 45px;
     position: fixed;
 }
 
@@ -88,16 +88,25 @@ h1.title {
     position: fixed;
     top: 70%;
     left: 55%;
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: 900;
+    font-size: 27px;
     font-family: 'Orbitron', sans-serif;
 }
 
 .enemy {
-    background-color: rgb(197, 54, 54);
+    background-color: rgb(195, 39, 39);
 }
 
 .target-enemy {
-    background-color: rgb(160, 0, 0);
-    color: white;
+    background-color: rgb(95, 23, 61);
+    color: rgba(255, 255, 255, 0.733);
+}
+
+.restart-button {
+    position: fixed;
+    top: 70%;
+    left: 55%;
+    font-weight: 700;
+    font-size: 24px;
+    font-family: 'Orbitron', sans-serif;
 }
