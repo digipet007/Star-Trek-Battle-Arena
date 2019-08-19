@@ -5,8 +5,8 @@
 /* add a background */
 body {
     background-image: url("../images/background.jpg");
-    background-color: #886565;
-    /* background-position-y: 58px; */
+    background-color: #ff7957;
+    background-position-y: 58px;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -80,11 +80,6 @@ h1.title {
     font-weight: bold;
 }
 
-/* #enemiesAvailableToAttack{
-    position: fixed;
-    top: 455px;
-} */
-
 #yourCharacter, #enemiesAvailableToAttack, #fightSection, #defender{
     clear: both;
 }
@@ -99,10 +94,10 @@ h1.title {
 }
 
 .enemy {
-    background-color: rgb(200, 0, 0);
+    background-color: rgb(197, 54, 54);
 }
 
 .target-enemy {
-    background-color: rgb(110, 0, 0);
+    background-color: rgb(160, 0, 0);
     color: white;
 }

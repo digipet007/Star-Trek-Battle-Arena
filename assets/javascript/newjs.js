@@ -295,7 +295,7 @@ $(document).ready(function() {
 
                 if (deaths >= 3) {
                     renderMessage("clearMessage");
-                    restartGame("You win!!");
+                    restartGame("You are the undefeated champion!!");
                 }
             }
         }
