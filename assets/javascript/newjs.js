@@ -167,8 +167,8 @@ $(document).ready(function() {
         //create div to hold end of game message
         var gameState = $("<div>").text(inputEndGame);
         //render restart button and message
-        $("body").append(gameState);
-        $("body").append(restart);
+        $("#directions").append(gameState);
+        $("#directions").append(restart);
     }
     //--------------------------------------------------------------------------
     //note to self: function expressions (not declarations) must be called after the expression (acting as a variable)

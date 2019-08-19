@@ -101,12 +101,3 @@ h1.title {
     background-color: rgb(95, 23, 61);
     color: rgba(255, 255, 255, 0.733);
 }
-
-.restart-button {
-    position: fixed;
-    top: 70%;
-    left: 55%;
-    font-weight: 700;
-    font-size: 24px;
-    font-family: 'Orbitron', sans-serif;
-}
