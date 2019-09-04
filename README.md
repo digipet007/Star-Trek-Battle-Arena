@@ -1,6 +1,6 @@
 # unit-4-game
 
-This is a Star Trek battle arena game, an interactive game to be played in your web browser. Choose your hero from a list of Worf, Picard, Spock, and Gorn.  Then, choose your opposing enemy to battle from the remaining characters. Each character in the game has 3 attributes: `Health Points`, `Attack Power` and `Counter Attack Power`. Open the console to view each character's stats. Each time your character attacks, their `Attack Power` permanently increases by 6 points for the duration of the game. Win the game by cleverly selecting the proper order of opponents to at attack and defeating all opponents.  
+This is a Star Trek battle arena game, an interactive game to be played in your web browser. Choose your hero from a list of Worf, Picard, Spock, and Gorn.  Then, choose your opposing enemy to battle from the remaining characters. Each character in the game has 3 attributes: `Health Points`, `Attack Power` and `Counter Attack Power`. Open the console to view each character's stats. Each time your character attacks, their `Attack Power` permanently increases by 6 points for the duration of the game. Win the game by cleverly selecting the proper order of opponents to attack and defeating all opponents.  
 
 ## Getting Started
 
@@ -14,8 +14,7 @@ This game will function in most browsers for desktop or laptop computers.
 
 *HTML
 *CSS
-*Javascript
-*uses jQuery to dynamically update the HTML
+*uses Javascript and jQuery to dynamically update the HTML
 
 ## Contributing
 

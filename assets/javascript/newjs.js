@@ -62,12 +62,10 @@ $(document).ready(function() {
         if (charStatus === "enemy") {
             $(charDiv).addClass("enemy");
         }
-        else if (charStatus === "defender"){
-            // console.log("charStatus is defender");  
-            //empty variable, currDefender is assigned the current defender's info
+        else if (charStatus === "defender"){ 
+            //empty variable, currDefender, is assigned the current defender's info
             currDefender = character;
-            // console.log(currDefender); checks out
-            $(charDiv).addClass("target-enemy"); //problem: does not assign class- fixed!!
+            $(charDiv).addClass("target-enemy"); 
         }
     }
     //function for messages
@@ -197,14 +195,12 @@ $(document).ready(function() {
                 //loop through remaining characters and push them to the enemies array using for variable in object loop (used above as well) **Had to include characters[key] in if statement to facilitate mutual exclusivity of combatants
                 for (var key in characters) {
                     if (characters[key] !== currentlySelectedCharacter) {
-                        // console.log(characters[key]);
                         combatants.push(characters[key]);
                     }
                 }
-                // console.log(combatants);
                 $("#character-pictures").hide();
                 renderCharacters(currentlySelectedCharacter, "#yourCharacter");
-                choosingEnemy = true; //not sure if this should be here...
+                choosingEnemy = true; 
                 renderCharacters(combatants, "#enemiesAvailableToAttack");
             }
         }
@@ -217,15 +213,10 @@ $(document).ready(function() {
             var counterAttackMessage = currDefender.name + " attacked you back for " + currDefender.counterAttackPower + " damage.";
             renderMessage("clearMessage");
             //reduce defender's health
-            // console.log(currDefender); checks out now
-            // console.log(currentlySelectedCharacter.attackPower);
             currDefender.health -= currentlySelectedCharacter.attackPower;
             //attack power increases by 6 each time your caracter attacks
             currentlySelectedCharacter.attackPower += 6;
-            // console.log(currentlySelectedCharacter.attackPower);
-            // console.log(currDefender); checks out now
             if (currDefender.health > 0) {
-                // console.log("currDefender's health > 0"); //fixed problem: wasn't firing
                 //update defender's/enemy's health on their display- completed in if statement in line 136
                 renderCharacters(currDefender, "playerDamage"); 
                 //render messages
@@ -253,21 +244,9 @@ $(document).ready(function() {
                 $("#enemiesAvailableToAttack").show();
                 //gets the index of the defeated opponent
                 if (deaths === 1){
-                    // console.log(deaths);
-                    // console.log(combatants[index]); //checks out
-                    //causes name in rendering functions to become undefined (maybe line 114):
-                    // delete combatants[index];
                     var index = combatants.indexOf(currDefender);
                     for (var key in combatants) {
-                        // console.log(combatants); checks out
-                        //broke entire code. Game starts unrendered:
-                        // if (characters[key] !== currentlySelectedCharacter && characters[key] !== combatants[index]) {
                         if (combatants[key] !== combatants[index]) {
-                        // console.log(combatants[key]); //checks out!
-                        // console.log(charobj); charobj is undefined
-                        // $(combatants).empty();
-                        // // console.log(characters[key]);
-                        // combatants.push(characters[key]);
                         renderEm(combatants[key], "#enemiesAvailableToAttack", "enemy"); 
                         choosingEnemy = true;
                         }
@@ -281,12 +260,6 @@ $(document).ready(function() {
                     choosingEnemy = true;
                     }
                 }
-                // if (combatants[index].health <= 0) {
-                //     (combatants[index]).detatch();
-                // } 
-                //also need to consolelog damage
-                // $("div").remove(".target-enemy"); this class is removed after defeat
-                // $(".target-enemy").hide();
                 if (deaths >= 3) {
                     renderMessage("clearMessage");
                     restartGame("You are the undefeated champion!!");
