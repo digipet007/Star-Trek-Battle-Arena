@@ -42,8 +42,6 @@ $(document).ready(function() {
     var combatants = [];
     //populated once player selects an enemy
     var currDefender;
-    //counter variable to keep track of turns and serve as damage multiplier for character turns
-    var turnCounter = 1;
     //stores number of defeated opponents
     var deaths = 0;
 
@@ -168,7 +166,6 @@ $(document).ready(function() {
         $("#directions").append(restart);
     }
     //--------------------------------------------------------------------------
-    //note to self: function expressions (not declarations) must be called after the expression (acting as a variable)
     //function call to render all characters to the starting area to begin the game
     renderCharacters(characters, "#character-pictures");
 
@@ -268,6 +265,5 @@ $(document).ready(function() {
                 }
             }
         }
-        turnCounter++;
     })
 });
