@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    //Establish object listing each character's health, attack power, and counter attack power
+    //object lists each character's stats
     var characters = {
         "worf" : {
             "name" : "Worf",
             "imageURL" : "assets/images/worf.jpg",
-            "health" : 100,
-            "attackPower" : 18,
+            "health" : 101,
+            "attackPower" : 10,
             "counterAttackPower" : 30,
         },
         "picard": {
@@ -48,15 +48,13 @@ $(document).ready(function() {
     //FUNCTIONS -------------------------------------------------------------------------
     //This function will render a character card to the page when called
     var renderEm = function(character, renderArea, charStatus) {
-        //creating divs, displayed names, and images using jQuery
         var charDiv = $("<div class='character' data-name='" + character.name + "'>");
         var charName = $("<div class='characterTitle'>").text(character.name);
         var charImage = $("<img alt='character image' class='pic'>").attr("src", character.imageURL);
-        var charHealth = $("<div class='characterHealth'>").text(character.health);
-        //appends everything to the charDiv, then appends charDiv to target location add to end: 
+        var charHealth = $("<div class='characterHealth'>").text(character.health); 
         charDiv.append(charName).append(charImage).append(charHealth);
         $(renderArea).append(charDiv);
-        //if the character is a defender, add the .enemy class
+        //if the charStatus argument for renderEm function is "enemy"...
         if (charStatus === "enemy") {
             $(charDiv).addClass("enemy");
         }
@@ -66,53 +64,49 @@ $(document).ready(function() {
             $(charDiv).addClass("target-enemy"); 
         }
     }
-    //function for messages
+    //function for directions
     var renderMessage = function(message) {
         var gameMessage = $("#directions");
         var newMessage = $("<div>").text(message);
         gameMessage.append(newMessage);
-        //clear message
         if (message === "clearMessage"){
             gameMessage.text("");
         }
     }
-
-    //renderCharacter function renders the characters as a string.
+    //renders the characters as a string
     //parameters: 1) the character to be rendered 2) in which ID they will be rendered   
     var renderCharacters = function(charobj, areaRender) {
-    //conditional checks to see if we are targeting the desired HTML section (specified as argument when calling the function)
+    //conditional checks to see if we are targeting the desired HTML section
         if (areaRender === "#character-pictures") {
             //empty the defender div first, since different characters will cycle through here.
             $(areaRender).empty();
-            //for statement will loop through the properties of the object. Each time, the variable "key" will represent the property
             for (var key in charobj) {
-                //if statement makes sure the object is not empty
+                //make sure the object is not empty
                 if (key in charobj) {
                     //renders a div for every object in the characters object
                     renderEm(charobj[key], areaRender, "");
                 }
             }
         }
-        //Selected character will appear in the yourCharacter div when this function is called with the appropriate argument.
+        //Selected character will appear in the yourCharacter div
         if(areaRender === "#yourCharacter") {
             renderEm(charobj, areaRender, "");
         }
-        //When this function is called with the enemiesAvailableToAttack div argument, enemies (sorted below), will render to that div
+        //enemies (sorted below), will render to the #enemiesAvailableToAttackDiv
         if(areaRender === "#enemiesAvailableToAttack") {
             choosingEnemy = true;
             
-            //Loop through combatants array
+            //Loop through combatants array; charStatus of "enemy" will assign it .enemy class
             for(var i = 0; i < charobj.length; i++){
-                renderEm(charobj[i], areaRender, "enemy"); //added enemy status loop in beginning of code then adds enemy class.
+                renderEm(charobj[i], areaRender, "enemy"); 
             }
             //on click event for each enemy
             $(document).on("click", ".enemy", function(){
                 var name = ($(this).attr("data-name"));
                 //check to make sure there are not yet defenders
                 if ($("#defender").children().length <=1) {
-                    // console.log("#defender characters are less than 1"); //checks out
                     renderCharacters(name, "#defender"); 
-                    $("#enemiesAvailableToAttack").hide(); //works! note: used to be $("this").hide();
+                    $("#enemiesAvailableToAttack").hide(); 
                     renderMessage("clearMessage");
                     choosingEnemy = false;
                 }
@@ -120,15 +114,9 @@ $(document).ready(function() {
         }
         //make sure the selected enemy needs to be rendered to the #defender div. If so, render
         if (areaRender === "#defender") {
-            // console.log("#defender is areaRender"); //checks out
-            $(areaRender).empty(); //feedback from console thumbs up
-            // console.log(charobj);
-            
+            $(areaRender).empty(); 
             for (var i = 0; i < combatants.length; i++){
-                //console.log(combatants[i].name);
-                // console.log("for loop in line 122 working"); //checks out
-                if(combatants[i].name === charobj){  //fixed problem of not specifying index or the array of objects (aka combatants)
-                    // console.log(combatants[i].name); // fixed!!
+                if(combatants[i].name === charobj){  
                     renderEm(combatants[i], areaRender, "defender");
                 }
             }
@@ -137,13 +125,11 @@ $(document).ready(function() {
         if (areaRender === "playerDamage") {
             $("#defender").empty();
             renderEm(charobj, "#defender", "defender");
-            // console.log(charobj);
         }
         //render your character's health stats all over again
         if (areaRender === "enemyDamage") {
             $("#yourCharacter").empty();
-            // console.log(currentlySelectedCharacter);
-            renderEm(currentlySelectedCharacter, "#yourCharacter", ""); //fixed problem: thought defender was charobj AND currentlySelectedCharacter
+            renderEm(currentlySelectedCharacter, "#yourCharacter", ""); 
         }
         //defeated enemy is removed
         if (areaRender === "enemyDefeated"){
@@ -172,7 +158,8 @@ $(document).ready(function() {
     //on click event for selecting main character. Only happens once in the game
     $(document).on("click", ".character", function() {
         if (choosingEnemy === false && hasSelectedCharacter === false){
-            //"name" is given the value of the attribute data name of the selected DOM element/ div (aka: "this"). The variable stores the data-name of WHATEVER character is clicked on.
+            //"name" is given the value of the attribute data name of the selected DOM element/ div (aka: "this"). 
+            //The variable stores the data-name of WHATEVER character is clicked on.
             var selectedName = $(this).attr("data-name");
             hasSelectedCharacter = true;
             if (selectedName === "Worf") {
