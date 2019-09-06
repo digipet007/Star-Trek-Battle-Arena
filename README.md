@@ -4,9 +4,9 @@ This is a Star Trek battle arena game, an interactive game to be played in your 
 
 ## Getting Started
 
-To play, download from Github (https://github.com/digipet007/unit-4-game) and open the index.html file in you web browser. This is all you need to get the project up and running on your local machine.
+To play, download from Github (https://github.com/digipet007/Star-Trek-Battle-Arena) and open the index.html file in you web browser. This is all you need to get the project up and running on your local machine.
 
-or simply play online: (https://digipet007.github.io/unit-4-game/)
+or simply play online: (https://digipet007.github.io/Star-Trek-Battle-Arena/)
 
 ### Prerequisites
 
