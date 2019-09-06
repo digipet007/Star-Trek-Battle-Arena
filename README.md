@@ -34,3 +34,4 @@ This project is licensed under the MIT License
 ## Acknowledgments
 
 * This app utilizes the Myerweb CSS reset (https://meyerweb.com/eric/tools/css/reset/) 
+* Created for UW Full Stack Flex Certificate program, according to program specifications.
