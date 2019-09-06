@@ -14,9 +14,9 @@ This game will function in most browsers for desktop or laptop computers.
 
 ## Built With
 
-*HTML
-*CSS
-*uses Javascript and jQuery to dynamically update the HTML
+* HTML
+* CSS
+* uses Javascript and jQuery to dynamically update the HTML
 
 ## Contributing
 
