@@ -2,7 +2,6 @@
     box-sizing: border-box;
 }
 
-/* add a background */
 body {
     background-image: url("../images/background.jpg");
     background-color: #f6879f;
@@ -12,22 +11,21 @@ body {
     background-size: cover;
 }
 
-div.container {
-    margin: 0px 0px 0px 10px;
+div.main-container {
+    margin: 5px 5px 5px 5px;
 }
 
 #character-pictures {
     text-align: center;
     position: relative;
     float: left;
-    margin: 0px 0px 0px 20px;
 }
 
 .character {
     float: left;
     background-color: wheat;
     padding: 0px 15px 0px 15px;
-    margin: 10px 0px 0px 0px;
+    margin: 10px 0px 0px 8px;
     border: 2px solid black;
     text-align: center;
     position: relative;
@@ -52,23 +50,6 @@ div.container {
     line-height: 1.5;
 }
 
-h1.title {
-    text-align: right;
-    margin: 0px 70px 3px 0px;
-    padding: 10px; 
-    font-weight: 950;
-    font-size: 40px;
-    font-family: 'Orbitron', sans-serif;
-    color: rgb(56, 1, 1);
-    position: static;
-}
-
-#icon{
-    top: 5px;
-    right: 600px;
-    height: 45px;
-    position: fixed;
-}
 
 .characterTitle{
     margin: 0px 0px 0px 0px;
@@ -100,4 +81,45 @@ h1.title {
 .target-enemy {
     background-color: rgb(95, 23, 61);
     color: rgba(255, 255, 255, 0.733);
+}
+
+h1 {
+    margin: 0px 70px 3px 0px;
+    padding: 10px; 
+    font-weight: 950;
+    font-size: 2.5em;
+    font-family: 'Orbitron', sans-serif;
+    color: rgb(56, 1, 1);
+    float: right;
+}
+
+#icon {
+    height: 3em;
+    width: auto;
+    float: right;
+}
+
+.mast-head {
+    background-color: #f6879f;
+    width: 100%;
+    height: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+    .mast-head {
+        background-color: #f6879f;
+        width: 100%;
+        height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .mast-head> span > .title::after {
+        clear: both;
+    }
+
+    .mast-head> span > .title {
+        font-size: 23px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
